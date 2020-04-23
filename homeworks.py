@@ -11,10 +11,10 @@ db = mysql.connect(
     database= "homeworks"
 )
 
-print("welcome to the homework app devloped by Aaryan Sinha Roy \n This is the pro version in which you can store infinite number of homeworks")
-print("press n for new howmwork \n press v for view all homeworks")
+print("welcome to the homework app devloped by Aaryan Sinha Roy \n ")
+print("Press n for new howmwork \n press v for view all homeworks")
 cursor = db.cursor()
-
+# the new homework functiion that adds a new homework to database
 def newHomework():
     sub=input("enter subject ")
     hwinfo=input("enter homework info ")
@@ -26,20 +26,19 @@ def newHomework():
     db.commit()
     print("record sucessfully created")
 
-
+#view record function that gets data from the database and shows it to user in form of an ASCII  table
 def viewRecords():
     print("Here are all your pending homeworks \n ")
     cursor.execute("SELECT * FROM srno")
-    #results=cursor.fetchall()
     leresults=from_db_cursor(cursor)
-    #for x in results:
     print(leresults)
     print("\n \n please complete your pending homeworks")
-
-inp =input()
+    
+#Ui code
+inp = input()
 if inp=="n":
     newHomework()
 elif inp=="v":
     viewRecords()
 else:
-    print("you shouldnt have clicked it")
+    print("invalid option")
